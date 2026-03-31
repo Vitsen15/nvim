@@ -6,7 +6,7 @@ return {
         gopls = {
           settings = {
             gopls = {
-              buildFlags = { "-tags=swagger" },
+              buildFlags = { "-tags=swagger,integration" },
             },
           },
         },
