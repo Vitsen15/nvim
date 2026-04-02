@@ -1,0 +1,1 @@
+-- Registers blade as a known filetype (neovim/neovim#38082)
