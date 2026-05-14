@@ -10,6 +10,13 @@ return {
     -- Avoids watcher ENOENT in non-Laravel cwd and DB-connect spam at startup.
     ft = { "php", "blade" },
     event = { "BufEnter composer.json" },
+    -- Plugin assumes cwd is Laravel root: hardcodes vendor/nvim-laravel/ and
+    -- runs models_loader unconditionally at boot. In monorepos where Laravel
+    -- lives in a subdir (e.g. forward-secrets-api/backend/), skip the plugin
+    -- unless nvim's cwd contains artisan.
+    cond = function()
+      return vim.fn.filereadable(vim.fn.getcwd() .. "/artisan") == 1
+    end,
     cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
     keys = {
       { "<leader>la", ":Laravel artisan<cr>" },
