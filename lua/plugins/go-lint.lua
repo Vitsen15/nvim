@@ -37,4 +37,16 @@ return {
       }
     end,
   },
+  {
+    -- The linter above runs `go tool golangci-lint`, i.e. the version pinned in
+    -- the project's go.mod, which is what CI and `.golangci.yml` are written
+    -- against. Mason's own golangci-lint is therefore never invoked, so keep it
+    -- out of ensure_installed instead of downloading 40M that nothing runs.
+    "mason-org/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = vim.tbl_filter(function(p)
+        return p ~= "golangci-lint"
+      end, opts.ensure_installed or {})
+    end,
+  },
 }
