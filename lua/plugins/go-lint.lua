@@ -6,6 +6,14 @@ return {
       opts.linters = opts.linters or {}
       opts.linters.golangcilint = {
         cmd = "go",
+        condition = function(ctx)
+          return vim.fs.find({
+            ".golangci.yml",
+            ".golangci.yaml",
+            ".golangci.toml",
+            ".golangci.json",
+          }, { upward = true, path = ctx.dirname })[1] ~= nil
+        end,
         args = {
           "tool",
           "golangci-lint",
