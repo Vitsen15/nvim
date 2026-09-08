@@ -24,11 +24,7 @@ local function reload_all()
     return
   end
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    if
-      vim.api.nvim_buf_is_loaded(buf)
-      and vim.bo[buf].buftype == ""
-      and vim.api.nvim_buf_get_name(buf) ~= ""
-    then
+    if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].buftype == "" and vim.api.nvim_buf_get_name(buf) ~= "" then
       pcall(vim.cmd, ("silent! checktime %d"):format(buf))
     end
   end
@@ -37,8 +33,6 @@ end
 vim.api.nvim_create_autocmd({
   "FocusGained",
   "BufEnter",
-  "CursorHold",
-  "CursorHoldI",
   "TermClose",
   "TermLeave",
 }, {

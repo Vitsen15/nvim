@@ -1,11 +1,12 @@
--- folke/sidekick.nvim: libuv fs_event watcher reloads buffers when AI tools
--- (Claude Code etc.) edit files externally. Pairs with lsp-external-changes.lua,
--- which enables didChangeWatchedFiles so LSP servers see those edits too.
+-- folke/sidekick.nvim: Claude Code terminal integration.
+-- External file reloads are handled by config/autocmds.lua.
 return {
   {
     "folke/sidekick.nvim",
     opts = {
+      nes = { enabled = false },
       cli = {
+        watch = false,
         tools = { claude = {} },
       },
     },
@@ -52,11 +53,14 @@ return {
             nargs = "*",
             desc = "Alias for :lsp " .. native,
             complete = function(arg)
-              return vim.tbl_map(function(c)
-                return c.name
-              end, vim.tbl_filter(function(c)
-                return c.name:sub(1, #arg) == arg
-              end, vim.lsp.get_clients()))
+              return vim.tbl_map(
+                function(c)
+                  return c.name
+                end,
+                vim.tbl_filter(function(c)
+                  return c.name:sub(1, #arg) == arg
+                end, vim.lsp.get_clients())
+              )
             end,
           })
         end
