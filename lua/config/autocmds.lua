@@ -107,3 +107,16 @@ vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete", "BufWipeout", "BufReadPost"
   callback = schedule_sync_watches,
 })
 schedule_sync_watches()
+
+-- No format-on-save for Markdown: prettier re-aligns tables in repos without
+-- a Prettier config. <leader>uF toggles it per buffer; the nil check keeps
+-- that choice when the buffer is reloaded.
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("markdown_no_autoformat", { clear = true }),
+  pattern = "markdown",
+  callback = function()
+    if vim.b.autoformat == nil then
+      vim.b.autoformat = false
+    end
+  end,
+})
