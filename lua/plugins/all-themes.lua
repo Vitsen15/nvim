@@ -1,8 +1,21 @@
 return {
-  -- Load all theme plugins but don't apply them
-  -- This ensures all colorschemes are available for hot-reloading
+  -- Load all theme plugins but don't apply them.
+  -- This ensures all colorschemes are available for hot-reloading.
+  --
+  -- The list matches the plugins Omarchy 4.5's themes use: the themes that ship
+  -- their own neovim.lua, plus aether for the themes generated from
+  -- default/themed/neovim.lua.tpl.
   {
-    "ribru17/bamboo.nvim",
+    -- URL, name and branch must match Omarchy's generated theme spec
+    -- (default/themed/neovim.lua.tpl), or lazy clones a second copy at runtime.
+    "omacom/aether.nvim",
+    branch = "v3",
+    name = "aether",
+    lazy = true,
+    priority = 1000,
+  },
+  {
+    "ficcdaf/ashen.nvim",
     lazy = true,
     priority = 1000,
   },
@@ -13,7 +26,7 @@ return {
     priority = 1000,
   },
   {
-    "sainnhe/everforest",
+    "neanias/everforest-nvim",
     lazy = true,
     priority = 1000,
   },
@@ -28,7 +41,17 @@ return {
     priority = 1000,
   },
   {
+    "bjarneo/hackerman.nvim",
+    lazy = true,
+    priority = 1000,
+  },
+  {
     "rebelot/kanagawa.nvim",
+    lazy = true,
+    priority = 1000,
+  },
+  {
+    "omacom-io/lumon.nvim",
     lazy = true,
     priority = 1000,
   },
@@ -38,12 +61,12 @@ return {
     priority = 1000,
   },
   {
-    "loctvl842/monokai-pro.nvim",
+    "EdenEast/nightfox.nvim",
     lazy = true,
     priority = 1000,
   },
   {
-    "shaunsingh/nord.nvim",
+    "OldJobobo/retro-82.nvim",
     lazy = true,
     priority = 1000,
   },
